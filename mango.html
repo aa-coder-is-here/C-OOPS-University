@@ -1,0 +1,142 @@
+<style>
+  .volBtn {
+    position: absolute;
+    z-index: 999;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  @media (min-width: 600px) {
+    .volBtn,
+    .video-wrapper {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .desktop {
+      display: none !important;
+    }
+
+    .btn-yeah {
+      animation: fadeBtn 1s ease-in-out forwards;
+      opacity: 0;
+    }
+  }
+
+  @font-face {
+    font-family: "Futura";
+    src: url("https://cdn.shopify.com/s/files/1/0917/2317/0089/files/futura_n4.df36ce3d9db534a4d7947f4aa825495ed740e410.woff2?v=1739961369")
+      format("woff2");
+  }
+
+  .btn-yeah {
+    font-family: "Futura", sans-serif;
+  }
+
+  @keyframes fadeBtn {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .video-wrapper video,
+  .video-wrapper .fallback-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .btn-yeah {
+    margin: 5px;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+  }
+
+  .web-logo {
+    max-width: 200px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="logo-layout">
+  <img class="desktop" src="https://cdn.shopify.com/s/files/1/0523/5182/8141/files/Banner_Updaed_Version.jpg?v=1747040864" alt="">
+
+  <img src="https://cdn.shopify.com/s/files/1/0935/2776/9405/files/silence.png?v=1747048598" class="volBtn" alt="Toggle Volume" />
+
+  <div class="video-wrapper">
+    <img src="https://cdn.shopify.com/s/files/1/0935/2776/9405/files/vlcsnap-2025-05-12-17h07m24s394.png?v=1747051666" alt="Fallback" class="fallback-img" />
+
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="mobile"
+      onloadeddata="this.previousElementSibling.style.display='none'">
+      <source src="https://cdn.shopify.com/videos/c/o/v/c11a73af1a634d8e83cebfea9772c91f.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="button-container">
+    <img class="web-logo" src="https://cdn.shopify.com/s/files/1/0523/5182/8141/files/Untitled-2_white_f739224b-c4c9-4410-aa86-49c131be4989.png?v=1722583161" alt="Logo" />
+    <button onclick="location.href='/pages/men'" class="btn-yeah">Men</button>
+    <button onclick="location.href='/pages/women'" class="btn-yeah">Women</button>
+    <a href="https://www.puropelle.com/collections/new-arrival-2-0?filter.v.availability=1"><button class="btn-yeah">New Arrival</button></a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const video = document.querySelector("video.mobile");
+    const volBtn = document.querySelector(".volBtn");
+
+    const imgSrc = {
+      muted: "https://cdn.shopify.com/s/files/1/0935/2776/9405/files/silence.png?v=1747048598",
+      loud: "https://cdn.shopify.com/s/files/1/0935/2776/9405/files/audio.png?v=1747048598"
+    };
+
+    if (video && volBtn) {
+      video.volume = 0;
+      volBtn.src = imgSrc.muted;
+      video.muted = true;
+
+      volBtn.addEventListener("click", function () {
+        if (video.volume === 0) {
+          video.volume = 1;
+          volBtn.src = imgSrc.loud;
+          video.muted = false;
+        } else {
+          video.volume = 0;
+          video.muted = true;
+          volBtn.src = imgSrc.muted;
+        }
+        video.play();
+      });
+    }
+  });
+</script>

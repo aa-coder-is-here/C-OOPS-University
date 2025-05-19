@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+class Counter{
+  private:
+    unsigned int count;
+  public:
+   Counter() : count(0) {};
+  unsigned int get_count(){
+    return count;
+  }
+  Counter operator ++(int){
+     ++count;
+     Counter temp;
+     temp.count = count;
+     return temp;
+  }
+  void display(){
+    return count;
+  }
+};
+int main(){
+  Counter c1, c2;
+  c1++;
+  c2 = c1++;
+}
